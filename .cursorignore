@@ -1,0 +1,3 @@
+# Hide SVG files from AI context
+*.svg
+
