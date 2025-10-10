@@ -2001,13 +2001,32 @@
             }
         };
 
+        // Get language from URL parameter or localStorage
+        function getInitialLanguage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = urlParams.get('lang');
+            
+            // Priority: URL param > localStorage > default 'en'
+            if (langParam && (langParam === 'en' || langParam === 'es')) {
+                localStorage.setItem('lang', langParam); // Save preference
+                return langParam;
+            }
+            
+            return localStorage.getItem('lang') || 'en';
+        }
+
         // Current language
-        let currentLang = localStorage.getItem('lang') || 'en';
+        let currentLang = getInitialLanguage();
 
         // Switch language function
         function switchLanguage(lang) {
             currentLang = lang;
             localStorage.setItem('lang', lang);
+            
+            // Update URL parameter without reload
+            const url = new URL(window.location);
+            url.searchParams.set('lang', lang);
+            window.history.replaceState({}, '', url);
             
             // Update language buttons
             document.querySelectorAll('.lang-btn').forEach(btn => {
