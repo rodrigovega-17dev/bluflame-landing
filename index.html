@@ -2087,10 +2087,16 @@
                 el.textContent = t.portfolio.items[i].desc;
             });
             document.querySelectorAll('.portfolio-link').forEach(el => {
-                const hasSpan = el.querySelector('span');
-                if (hasSpan) {
-                    const spans = el.querySelectorAll('span');
-                    spans[0].textContent = el.closest('.portfolio-card').onclick ? t.portfolio.viewCase : t.portfolio.viewProject;
+                const spans = el.querySelectorAll('span');
+                if (spans.length >= 2) {
+                    const parentCard = el.closest('.portfolio-card');
+                    const handler = (parentCard && parentCard.getAttribute('onclick')) || '';
+                    // Treat cards that call openCaseStudy(...) as Case Study; others as Project
+                    if (handler.includes('openCaseStudy')) {
+                        spans[0].textContent = t.portfolio.viewCase;
+                    } else {
+                        spans[0].textContent = t.portfolio.viewProject;
+                    }
                 }
             });
             
@@ -2112,7 +2118,13 @@
             // Update CTA
             document.querySelector('[data-i18n="cta.title"]').innerHTML = t.cta.title;
             document.querySelector('[data-i18n="cta.subtitle"]').textContent = t.cta.subtitle;
-            document.querySelector('[data-i18n="cta.button"]').innerHTML = `<span>${t.cta.button}</span><span>💬</span>`;
+            const ctaButton = document.querySelector('[data-i18n="cta.button"]');
+            if (ctaButton) {
+                ctaButton.innerHTML = `<span>${t.cta.button}</span><span>💬</span>`;
+                const waMsg = currentLang === 'es' ? 'Hola, estoy interesado en sus servicios' : "Hello, I'm interested in your services";
+                const waHref = `https://wa.me/8139758332?text=${encodeURIComponent(waMsg)}`;
+                ctaButton.setAttribute('href', waHref);
+            }
             document.querySelector('[data-i18n="cta.footer"]').innerHTML = `${t.cta.footer} <a href="mailto:hello@bluflame.xyz" class="cta-email-link">hello@bluflame.xyz</a>`;
         }
 
@@ -2306,24 +2318,31 @@
         // Open Case Study Modal
         function openCaseStudy(projectId) {
             const modal = document.getElementById('caseStudyModal');
+            const modalContent = document.querySelector('.modal-content');
+            const bodyContainer = document.getElementById('modalBody');
             const caseStudies = getCaseStudies();
             const study = caseStudies[projectId];
             
             if (!study) return;
 
-            // Populate modal content
+            // Reset scroll FIRST before changing content
+            modal.scrollTop = 0;
+            modalContent.scrollTop = 0;
+            bodyContainer.scrollTop = 0;
+
+            // Clear and reset modal content
             document.getElementById('modalIcon').textContent = study.icon;
             document.getElementById('modalTitle').textContent = study.title;
             
-            // Populate tags
+            // Clear and populate tags
             const tagsContainer = document.getElementById('modalTags');
             tagsContainer.innerHTML = study.tags.map(tag => 
                 `<span class="modal-tag">${tag}</span>`
             ).join('');
             
-            // Populate body
+            // Clear and populate body
             const t = translations[currentLang].modal;
-            const bodyContainer = document.getElementById('modalBody');
+            bodyContainer.innerHTML = '';
             bodyContainer.innerHTML = `
                 <div class="case-study-section">
                     <div class="section-label">${t.overview}</div>
@@ -2367,7 +2386,7 @@
                     </div>
                 </div>
                 
-                <a href="https://wa.me/8139758332?text=Hello,%20I'm%20interested%20in%20your%20services" 
+                <a href="" 
                    target="_blank" 
                    rel="noopener noreferrer" 
                    class="modal-cta">
@@ -2379,13 +2398,29 @@
             // Show modal
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            // Update WhatsApp link based on language
+            const waMsg = currentLang === 'es' ? 'Hola, estoy interesado en sus servicios' : "Hello, I'm interested in your services";
+            const waHref = `https://wa.me/8139758332?text=${encodeURIComponent(waMsg)}`;
+            const modalCta = modal.querySelector('.modal-cta');
+            if (modalCta) modalCta.setAttribute('href', waHref);
+            requestAnimationFrame(() => {
+                modal.scrollTop = 0;
+                modalContent.scrollTop = 0;
+                bodyContainer.scrollTop = 0;
+            });
         }
 
         // Close Case Study Modal
         function closeCaseStudy() {
             const modal = document.getElementById('caseStudyModal');
+            const modalContent = document.querySelector('.modal-content');
+            const bodyContainer = document.getElementById('modalBody');
             modal.classList.remove('active');
             document.body.style.overflow = 'auto';
+            // Reset scroll so the next open starts at the very top
+            modal.scrollTop = 0;
+            modalContent.scrollTop = 0;
+            bodyContainer.scrollTop = 0;
         }
 
         // Close modal when clicking outside
