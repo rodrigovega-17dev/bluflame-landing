@@ -650,6 +650,14 @@
             overflow: hidden;
         }
 
+        .portfolio-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .portfolio-image::before {
             content: '';
             position: absolute;
@@ -1564,7 +1572,7 @@
             <div class="portfolio-grid">
                 <div class="portfolio-card fade-in" onclick="window.open('https://spineexplorer.netlify.app', '_blank')">
                     <div class="portfolio-image">
-                        <div class="portfolio-icon">🦴</div>
+                        <img class="portfolio-img" src="spine.png" alt="Spine Explorer preview" loading="lazy">
                     </div>
                     <div class="portfolio-content">
                         <div class="portfolio-tags">
@@ -1582,7 +1590,7 @@
 
                 <div class="portfolio-card fade-in" onclick="window.open('https://nutrisnapai.netlify.app', '_blank')">
                     <div class="portfolio-image">
-                        <div class="portfolio-icon">🍎</div>
+                        <img class="portfolio-img" src="nutrisnap.png" alt="NutriSnap AI preview" loading="lazy">
                     </div>
                     <div class="portfolio-content">
                         <div class="portfolio-tags">
@@ -1598,20 +1606,20 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-in" onclick="openCaseStudy('cardflow')">
+                <div class="portfolio-card fade-in" onclick="window.open('https://kozier.instantstartup.co/', '_blank')">
                     <div class="portfolio-image">
-                        <div class="portfolio-icon">💳</div>
+                        <img class="portfolio-img" src="echo office.png" alt="Echo Office Map preview" loading="lazy">
                     </div>
                     <div class="portfolio-content">
                         <div class="portfolio-tags">
                             <span class="portfolio-tag">Web App</span>
-                            <span class="portfolio-tag">Next.js</span>
-                            <span class="portfolio-tag">FinTech</span>
+                            <span class="portfolio-tag">Maps</span>
+                            <span class="portfolio-tag">Enterprise</span>
                         </div>
-                        <h3 class="portfolio-title">CardFlow</h3>
-                        <p class="portfolio-desc">Smart credit card manager that calculates optimal payment timing to maximize your days-to-pay window. Secure authentication with real-time utilization tracking.</p>
+                        <h3 class="portfolio-title">Echo Office Map</h3>
+                        <p class="portfolio-desc">Interactive office mapping solution for enterprise workspace management. Built with modern web technologies for seamless navigation and space optimization.</p>
                         <span class="portfolio-link">
-                            View Case Study <span>→</span>
+                            View Project <span>→</span>
                         </span>
                     </div>
                 </div>
@@ -1652,18 +1660,18 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-in" onclick="openCaseStudy('echo')">
+                <div class="portfolio-card fade-in" onclick="openCaseStudy('cardflow')">
                     <div class="portfolio-image">
-                        <div class="portfolio-icon">🏢</div>
+                        <div class="portfolio-icon">💳</div>
                     </div>
                     <div class="portfolio-content">
                         <div class="portfolio-tags">
                             <span class="portfolio-tag">Web App</span>
-                            <span class="portfolio-tag">Maps</span>
-                            <span class="portfolio-tag">Enterprise</span>
+                            <span class="portfolio-tag">Next.js</span>
+                            <span class="portfolio-tag">FinTech</span>
                         </div>
-                        <h3 class="portfolio-title">Echo Office Map</h3>
-                        <p class="portfolio-desc">Interactive office mapping solution for enterprise workspace management. Built with modern web technologies for seamless navigation and space optimization.</p>
+                        <h3 class="portfolio-title">CardFlow</h3>
+                        <p class="portfolio-desc">Smart credit card manager that calculates optimal payment timing to maximize your days-to-pay window. Secure authentication with real-time utilization tracking.</p>
                         <span class="portfolio-link">
                             View Case Study <span>→</span>
                         </span>
@@ -1837,8 +1845,8 @@
                             desc: 'AI-powered nutrition tracking app. Snap meals, get instant analysis, personalized coaching, and reach health goals faster with automatic food recognition.'
                         },
                         {
-                            title: 'CardFlow',
-                            desc: 'Smart credit card manager that calculates optimal payment timing to maximize your days-to-pay window. Secure authentication with real-time utilization tracking.'
+                            title: 'Echo Office Map',
+                            desc: 'Interactive office mapping solution for enterprise workspace management. Built with modern web technologies for seamless navigation and space optimization.'
                         },
                         {
                             title: 'WanderAI',
@@ -1849,8 +1857,8 @@
                             desc: 'AI-powered language learning companion with voice conversations. Practice speaking naturally with an AI tutor powered by Supabase and Expo.'
                         },
                         {
-                            title: 'Echo Office Map',
-                            desc: 'Interactive office mapping solution for enterprise workspace management. Built with modern web technologies for seamless navigation and space optimization.'
+                            title: 'CardFlow',
+                            desc: 'Smart credit card manager that calculates optimal payment timing to maximize your days-to-pay window. Secure authentication with real-time utilization tracking.'
                         },
                         {
                             title: 'Sprisa CoolFlow AI',
@@ -1947,8 +1955,8 @@
                             desc: 'App de seguimiento nutricional impulsada por IA. Toma fotos de comidas, obtén análisis instantáneo, coaching personalizado y alcanza objetivos de salud más rápido con reconocimiento automático de alimentos.'
                         },
                         {
-                            title: 'CardFlow',
-                            desc: 'Gestor inteligente de tarjetas de crédito que calcula el momento óptimo de pago para maximizar tu ventana de días de pago. Autenticación segura con seguimiento de utilización en tiempo real.'
+                            title: 'Echo Office Map',
+                            desc: 'Solución interactiva de mapeo de oficinas para gestión de espacios de trabajo empresariales. Construida con tecnologías web modernas para navegación perfecta y optimización de espacios.'
                         },
                         {
                             title: 'WanderAI',
@@ -1959,8 +1967,8 @@
                             desc: 'Compañero de aprendizaje de idiomas impulsado por IA con conversaciones de voz. Practica hablar naturalmente con un tutor de IA impulsado por Supabase y Expo.'
                         },
                         {
-                            title: 'Echo Office Map',
-                            desc: 'Solución interactiva de mapeo de oficinas para gestión de espacios de trabajo empresariales. Construida con tecnologías web modernas para navegación perfecta y optimización de espacios.'
+                            title: 'CardFlow',
+                            desc: 'Gestor inteligente de tarjetas de crédito que calcula el momento óptimo de pago para maximizar tu ventana de días de pago. Autenticación segura con seguimiento de utilización en tiempo real.'
                         },
                         {
                             title: 'Sprisa CoolFlow AI',
