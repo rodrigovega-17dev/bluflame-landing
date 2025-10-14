@@ -2095,17 +2095,13 @@
                 el.textContent = t.portfolio.items[i].desc;
             });
             document.querySelectorAll('.portfolio-link').forEach(el => {
-                const spans = el.querySelectorAll('span');
-                if (spans.length >= 2) {
-                    const parentCard = el.closest('.portfolio-card');
-                    const handler = (parentCard && parentCard.getAttribute('onclick')) || '';
-                    // Treat cards that call openCaseStudy(...) as Case Study; others as Project
-                    if (handler.includes('openCaseStudy')) {
-                        spans[0].textContent = t.portfolio.viewCase;
-                    } else {
-                        spans[0].textContent = t.portfolio.viewProject;
-                    }
-                }
+                const parentCard = el.closest('.portfolio-card');
+                const handler = (parentCard && parentCard.getAttribute('onclick')) || '';
+                const label = handler.includes('openCaseStudy')
+                    ? t.portfolio.viewCase
+                    : t.portfolio.viewProject;
+                // Normalize structure to two spans: label + arrow
+                el.innerHTML = `<span>${label}</span><span>→</span>`;
             });
             
             // Update certifications
